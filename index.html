@@ -1,0 +1,83 @@
+<head>
+  <title>mah-alias</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script> -->
+  <script src="script.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="mahalia.css" />
+  <!-- import the latest version of hydra synth-->
+  <script src="https://unpkg.com/hydra-synth"></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header id="home">
+    <nav>
+      <ul>
+        <div class="mmhr">
+          <li class="home"><a onClick="window.location.reload();"><s>mah</s>[alias]</a></li>
+        </div>
+        <div class="links">
+          <li>soundcloud</li>
+        </div>
+        <div class="links">
+          <li>links</li>
+        </div>
+      </ul>
+    </nav>
+  </header>
+
+  <canvas id="myCanvas" width="1000px" height="1000px"></canvas>
+
+  <script>
+      // create a new hydra-synth instance
+      var hydra = new Hydra({
+        canvas: document.getElementById("myCanvas"),
+        detectAudio: false
+      })
+      osc(200,.1,2).layer(noise(20,.1,0)
+      .modulate(voronoi(8,3,8)).color(1,0.5,10)
+      .luma(.1).scale(5)).out(o0)
+
+      osc(30,0.1,2)
+      .color(0, 0,0).kaleid()
+      .modulateScale(noise(2,1))
+      .mask(src(o0).luma(.01).thresh(.25))
+      .out(o1)
+
+      src(o0).modulateScale(o0, 5)
+      .layer(src(o1)).out(o2)
+
+      render(o2)
+
+      speed = 0.05
+
+      // // add different bgs
+      // function useCamera() {
+      //   s0.initCam()
+      //   src(s0).color(-1, Math.random()*2, 1).colorama().out()
+      // }
+      //
+      // function feedback() {
+      //   src(o1)
+      //     .layer(src(o0).mask(shape(4, 0.4, 0)))
+      //     .scrollX([0.005, -0.005])
+      //     .scrollY(0.005)
+      //     .out(o1)
+      //
+      //   render(o1)
+      // }
+    </script>
+
+  <!-- Content -->
+  <div class="main-content">
+    <div id="container">
+    </div>
+  </div>
+
+  <!-- <div class="footer">
+    &copy 2024 Mahalia Henry-Richards
+  </div> -->
+</body>
