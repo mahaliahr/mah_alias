@@ -1,6 +1,6 @@
 * {
   font-family: "Martian Mono", monospace;
-  overflow: hidden;
+  /* overflow: hidden; */
   font-size: 80px;
   color: #DEF8F4;
   margin: 0;
@@ -14,6 +14,13 @@ body {
   align-items: center; 
   height: 100vh;
   margin: 0;
+}
+
+ p {
+  font-size: 20px;
+  padding: 1rem;
+  text-align: left;
+  color: #DEF8F4;
 }
 
 #myCanvas {
@@ -75,11 +82,86 @@ nav ul li a {
   color: #DEF8F4;
 }
 
-li:hover a {
+li:hover a,
+a:hover {
   text-decoration: none;
-  /* color: #DEF8F4; */
-  /* color: #AA83EC; */
   color: #F0F600;
+}
+
+/* popup overlay */
+.hover_bg {
+    position: fixed;       /* make overlay cover viewport */
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.1);
+    cursor: pointer;
+    display: none;
+    height: 100vh;
+    text-align: center;
+    width: 100vw;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.hover_bg.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hover_bg .helper{
+    display:none; /* not needed with flex centering */
+}
+
+/* bio bg block */
+.hover_bg > div {
+    background-color: #0f0e0e;
+    box-shadow: 10px 10px 40px #803fe4;
+    display: block;
+    height: auto;
+    max-width: 480px;               
+    min-height: 100px;
+    width: min(90%, 480px);         
+    position: relative;
+    border-radius: 8px;
+    padding: 1rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.popupCloseButton {
+    cursor: pointer;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-size: 2rem;       
+    line-height: 1;
+    padding: 0.25rem 0.35rem;
+    min-width: 2rem;
+    min-height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: inherit;
+    z-index: 10001;
+    border-radius: 4px;
+  }
+.popupCloseButton:hover {
+    color: #F0F600;
+    background: rgba(255,255,255,0);
+}
+
+.trigger_popup {
+    cursor: pointer;
+    /* font-size: 20px; */
+    margin: 20px;
+    display: inline-block;
 }
 
 
@@ -90,3 +172,19 @@ li:hover a {
 @media only screen and (max-width: 590px) {
 * { font-size: 40px;}
 }
+
+/* better, consistent strikethrough */
+.strike {
+  text-decoration: line-through;
+  text-decoration-thickness: 0.12em;
+  text-decoration-color: currentColor;
+  text-decoration-skip-ink: none;
+  line-height: 1;               /* keep same height as surrounding text */
+  vertical-align: middle;      /* align with baseline */
+  display: inline-block;       /* lets translate adjust vertical position reliably */
+  transform: translateY(-0.06em); /* fine-tune alignment with surrounding text */
+  font-size: inherit;          /* ensure same size as surrounding text */
+}
+
+/* fallback styling for <s> */
+/* s { all: unset; text-decoration: line-through; text-decoration-thickness: 0.12em; text-decoration-color: currentColor; line-height: 1; vertical-align: middle; } */

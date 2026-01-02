@@ -1,6 +1,7 @@
 <head>
   <title>mah-alias</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="script.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,13 +16,20 @@
     <nav>
       <ul>
         <div class="name">
-          <li class="home"><a onClick="window.location.reload();"><s>mah</s>[alias]</a></li>
+          <a class="trigger_popup"><span class="strike">mah</span>[alias]</a>
+<div class="hover_bg">
+    <span class="helper"></span>
+    <div>
+        <div class="popupCloseButton">&times;</div>
+        <p><span class="strike">mah</span>[alias] is like Mahalia Henry-Richards, but different.</p>
+        <p><span class="strike">mah</span>[alias] is a musician + artist, creating audio/visual mayhem with code.</p>
+    </div>
+</div>
         </div>
         <div class="links">
           <li><a href="https://soundcloud.com/mahalias">soundcloud</a></li>
-        </div>
-        <div class="links">
           <li><a href="https://www.instagram.com/mm_hr_/">instagram</a></li>
+          <li><a onclick="window.open ('mailto:mahaliahenryrichards@gmail.com')">email</a></li>
         </div>
       </ul>
     </nav>
@@ -50,5 +58,6 @@
       render(o2)
 
       speed = 0.05
+      
     </script>
 </body>
