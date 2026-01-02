@@ -46,11 +46,13 @@ header {
 }
 
 nav {
-  display: flex;
-  justify-content: center; 
-  align-items: center; 
   position: fixed;
-  bottom: 30%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   width: 100%;
   z-index: 3000;
