@@ -1,6 +1,7 @@
 <head>
   <title>mah-alias</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="script.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,19 +18,54 @@
       <ul>
         <div class="name">
           <a class="trigger_popup"><span class="strike">mah</span>[alias]</a>
-<div class="hover_bg">
-    <span class="helper"></span>
-    <div>
-        <div class="popupCloseButton">&times;</div>
-        <p><span class="strike">mah</span>[alias] is like Mahalia Henry-Richards, but different.</p>
-        <p><span class="strike">mah</span>[alias] is a musician + artist, creating audio/visual mayhem with code.</p>
-    </div>
-</div>
+          <!-- popup bio info -->
+          <div class="hover_bg">
+              <span class="helper"></span>
+              <div>
+                  <div class="popupCloseButton">&times;</div>
+                  <p><span class="strike">mah</span>[alias] is like Mahalia Henry-Richards, but different.</p>
+                  <p><span class="strike">mah</span>[alias] is a musician + artist, creating audio/visual mayhem with code.</p>
+              </div>
+          </div>
         </div>
+        <!-- list of links -->
         <div class="links">
           <li><a href="https://soundcloud.com/mahalias">soundcloud</a></li>
           <li><a href="https://www.instagram.com/mm_hr_/">instagram</a></li>
           <li><a onclick="window.open ('mailto:mahaliahenryrichards@gmail.com')">email</a></li>
+          <!-- media popup panel -->
+          <li class="media">
+            <button class="media-toggle" aria-expanded="false">media ▾</button>
+            <div class="media-panel" hidden>
+              <!-- <div class="popupCloseButton">&times;</div> -->
+              <div class="embed">
+                <p>Release as part of Compassion through algorithms volume III, December 2025</p>
+                <iframe 
+                src="https://bandcamp.com/EmbeddedPlayer/album=970050645/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/track=3882580273/transparent=true/" 
+                seamless
+                style="border: 0; width: 100%; height: 120px;">
+                </iframe>
+                <p>Live @ Corsica Studios Algorave, November 2025</p>
+                <iframe
+                  src="https://www.youtube.com/embed/K-XDBHK-nLQ"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              <p>Live @ Peckham Digital Festival, October 2024</p>
+                <iframe  
+                src="https://www.youtube.com/embed/NjYFYwncrWk?si=V_kFavQ1felIvneG" title="YouTube video player" 
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+              </iframe>
+              <p>'one___? is all it takes', Summer 2024</p>
+         <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1882675254&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/mahalias" title="m̶a̶h̶[alias]" target="_blank" style="color: #cccccc; text-decoration: none;"></a><a href="https://soundcloud.com/mahalias/one_is-all-it-takes" title="one___? is all it takes" target="_blank" style="color: #cccccc; text-decoration: none;"></a></div>
+              
+              <p>Live @ IKLECTIK, December 2023</p>
+             <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A1692288591&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/mahalias" title="m̶a̶h̶[alias]" target="_blank" style="color: #cccccc; text-decoration: none;"></a><a href="https://soundcloud.com/mahalias/iklectik-algorave-2023" title="IKLECTIK Algorave Dec 2023" target="_blank" style="color: #cccccc; text-decoration: none;"></a></div>
+            </div>
+          </div>
+          </li>
         </div>
       </ul>
     </nav>
@@ -42,22 +78,43 @@
         canvas: document.getElementById("myCanvas"),
         detectAudio: false
       })
-      osc(200,.1,2).layer(noise(20,.1,0)
-      .modulate(voronoi(8,3,8)).color(1,0.5,10)
-      .luma(.1).scale(5)).out(o0)
 
-      osc(30,0.1,2)
-      .color(0, 0,0).kaleid()
-      .modulateScale(noise(2,1))
-      .mask(src(o0).luma(.01).thresh(.25))
-      .out(o1)
+      // detect if mobile/tablet (screen width <= 768px)
+      var isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-      src(o0).modulateScale(o0, 5)
-      .layer(src(o1)).out(o2)
+      if (isMobile) {
+        // simpler mobile-friendly Hydra 
+osc(50,.1,2).layer(noise(5,.1,0)
+        .modulate(voronoi(8,3,8)).color(1,0.5,10)
+        .luma(.1).scale(5)).out(o0)
 
-      render(o2)
+        osc(30,0.1,2)
+        .color(0, 0,0).kaleid()
+        .modulateScale(noise(2,1))
+        .mask(src(o0).luma(.01).thresh(.25))
+        .out(o1)
 
-      speed = 0.05
-      
+        src(o0).modulateScale(o1)
+        .layer(src(o1)).out(o2)
+
+        render(o2)
+        speed = 0.05
+      } else {
+        osc(200,.1,2).layer(noise(20,.1,0)
+        .modulate(voronoi(8,3,8)).color(1,0.5,10)
+        .luma(.1).scale(5)).out(o0)
+
+        osc(30,0.1,2)
+        .color(0, 0,0).kaleid()
+        .modulateScale(noise(2,1))
+        .mask(src(o0).luma(.01).thresh(.25))
+        .out(o1)
+
+        src(o0).modulateScale(o0, 5)
+        .layer(src(o1)).out(o2)
+
+        render(o2)
+        speed = 0.05
+      }
     </script>
 </body>

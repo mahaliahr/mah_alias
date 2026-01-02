@@ -1,3 +1,8 @@
+/* root font size for rem calcs*/
+html {
+  font-size: 16px; /* 1rem = 16px chrome/firefox */
+}
+
 * {
   font-family: "Martian Mono", monospace;
   /* overflow: hidden; */
@@ -43,6 +48,8 @@ header {
   /* font-weight: 600; */
   color: #DEF8F4;
   /* color: #FF4294; */
+  margin-bottom: 20px;  
+  /* margin-left: -75px; */
 }
 
 nav {
@@ -81,6 +88,7 @@ nav ul li a {
 
 
 .links {
+  position: relative;
   color: #DEF8F4;
 }
 
@@ -92,7 +100,7 @@ a:hover {
 
 /* popup overlay */
 .hover_bg {
-    position: fixed;       /* make overlay cover viewport */
+    position: fixed;       
     top: 0;
     left: 0;
     background: rgba(0,0,0,.1);
@@ -118,10 +126,10 @@ a:hover {
     display:none; /* not needed with flex centering */
 }
 
-/* bio bg block */
+/* bio bg block and text */
 .hover_bg > div {
     background-color: #0f0e0e;
-    box-shadow: 10px 10px 40px #803fe4;
+    box-shadow: 10px 10px 60px #803fe4;
     display: block;
     height: auto;
     max-width: 480px;               
@@ -129,10 +137,24 @@ a:hover {
     width: min(90%, 480px);         
     position: relative;
     border-radius: 8px;
-    padding: 1rem;
+    padding: 1rem;   /* now consistently 16px in both browsers */
     box-sizing: border-box;
-    font-size: 1rem;
+    font-size: 16px; /* explicit pixel size instead of rem */
     line-height: 1.4;
+    margin-top: -50vh; 
+}
+
+/* reset all elements inside bio popup */
+.hover_bg > div * {
+    margin: 0;
+    padding: 0;
+}
+
+.hover_bg > div p {
+    font-size: 16px;  /* px instead of rem browser consistency */
+    line-height: 1.5;
+    margin: 1rem;
+    padding: 0;
 }
 
 .popupCloseButton {
@@ -140,7 +162,7 @@ a:hover {
     position: absolute;
     top: 0.5rem;
     right: 0.75rem;
-    font-size: 2rem;       
+    font-size: 32px;  /* px instead of rem browser consistency */
     line-height: 1;
     padding: 0.25rem 0.35rem;
     min-width: 2rem;
@@ -156,15 +178,110 @@ a:hover {
   }
 .popupCloseButton:hover {
     color: #F0F600;
-    background: rgba(255,255,255,0);
 }
 
 .trigger_popup {
     cursor: pointer;
-    /* font-size: 20px; */
-    margin: 20px;
+    /* margin: 20px; */  /* remove this - causes misalignment */
     display: inline-block;
 }
+
+/* media dropdown */
+
+.media { position: relative; }
+.media-toggle {
+  cursor: pointer;
+  background: transparent;
+  color: inherit;
+  border: none;
+  padding: 0.25rem 0.4rem;
+  font-size: inherit; 
+}
+.media-toggle:hover {
+  color: #F0F600;
+  text-decoration: none;
+}
+
+.media-panel {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 0.5rem);
+  transform: translateX(-50%);
+  width: min(90vw, 640px);
+  max-width: 640px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: #0f0e0e;
+  padding: 16px;    /* explicit px */
+  border-radius: 8px;
+  box-shadow: 10px 10px 60px #803fe4;
+  box-sizing: border-box;
+  font-size: 16px;  /* explicit px */
+  line-height: 1.4;
+  z-index: 10002;
+}
+
+/* when open, center below button and be scrollable */
+.media-panel.show {
+  display: block;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90%, 640px);
+  max-width: 640px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 16px;  /* px instead of rem browser consistency */
+  z-index: 10002;
+}
+
+/* reset all elements inside media panel */
+.media-panel * {
+    margin: 0;
+    padding: 0;
+}
+
+.media-panel p {
+    font-size: 16px;  /* px instead of rem browser consistency */
+    line-height: 1.5;
+    margin: 0.75rem 0;
+    padding: 0;
+}
+
+.media-panel .embed {
+    margin-bottom: 1.5rem;
+}
+
+/* responsive embed inside panel */
+.media-panel .embed iframe {
+  width: 100%;
+  min-height: 315px;
+  aspect-ratio: 16/9;
+  display: block;
+  border: 0;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  vertical-align: top;  /* remove inline spacing */
+}
+
+/* override for bandcamp */
+.media-panel .embed iframe[src*="bandcamp"] {
+  height: 120px;
+  min-height: 120px;
+  aspect-ratio: auto;
+}
+
+/* override for soundcloud  */
+.media-panel .embed iframe[src*="soundcloud"] {
+  height: 166px;
+  min-height: 166px;
+  aspect-ratio: auto;
+}
+
+/* make sure hidden attribute doesn't show */
+.media-panel[hidden] { display: none; }
 
 
 @media only screen and (max-width: 768px) {
@@ -181,12 +298,9 @@ a:hover {
   text-decoration-thickness: 0.12em;
   text-decoration-color: currentColor;
   text-decoration-skip-ink: none;
-  line-height: 1;               /* keep same height as surrounding text */
-  vertical-align: middle;      /* align with baseline */
-  display: inline-block;       /* lets translate adjust vertical position reliably */
+  line-height: 1;              
+  vertical-align: middle;      
+  display: inline-block;       
   transform: translateY(-0.06em); /* fine-tune alignment with surrounding text */
-  font-size: inherit;          /* ensure same size as surrounding text */
+  font-size: inherit;          
 }
-
-/* fallback styling for <s> */
-/* s { all: unset; text-decoration: line-through; text-decoration-thickness: 0.12em; text-decoration-color: currentColor; line-height: 1; vertical-align: middle; } */
